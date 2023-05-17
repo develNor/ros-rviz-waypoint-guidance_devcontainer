@@ -1,0 +1,14 @@
+{
+	"folders": [
+        {
+            "path": "/home/ros-user/catkin_ws/src",
+            "name": "catkin-ws-src_bind-volume"
+        },
+        {
+            "path": "/home/ros-user"
+        },
+        {
+            "path": "."
+        },
+	],
+}

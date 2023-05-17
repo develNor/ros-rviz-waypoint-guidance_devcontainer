@@ -1,0 +1,47 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build docker-compose",
+            "type": "shell",
+            "command": "./build_docker-compose.sh",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build docker-compose --no-cache",
+            "type": "shell",
+            "command": "./build_docker-compose_no-cache.sh",
+            "problemMatcher": [],
+        },
+        {
+            "label": "down container",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "./down_container.sh",
+        },
+        {
+            "label": "start terminal",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "./start_terminal.sh",
+        },
+        {
+            "label": "up container",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "./up_container.sh",
+        },
+        {
+            "label": "init workspace",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "./init_workspace.sh",
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+# Usage: docker compose up -d && exec_in_new_terminal docker attach stack-sms-1.6.2_container
+services:
+    ros-service:
+        build:
+            # filepath to the Dockerfile
+            context: .
+            ssh:
+                # for ssh agent forwarding during build (used for cloning private git repos)
+                - default
+        image: ros-image
+        container_name: ros-container
+        environment:
+            # for ssh agent forwarding when entering the container
+            # This is done automatically by VSC, but when working via CLI this setting is required
+            SSH_AUTH_SOCK: ${SSH_AUTH_SOCK}
+            # for X11 forwarding
+            DISPLAY: $DISPLAY
+            # for software rendering of opengl. Fixes error in rqt
+            LIBGL_ALWAYS_SOFTWARE: 1  
+        # for X11 forwarding
+        network_mode: "host"
+        # this command will hold the container open
+        command: ["tail","-f","/dev/null"]
+        security_opt:
+            # for using the google chrome browser inside the container
+            # see: https://stackoverflow.com/a/53975412
+            - seccomp=unconfined
+            # fixes an error with rviz which occurs whith the obove seccomp profile
+            # see: https://answers.ros.org/question/301056/ros2-rviz-in-docker-container/
+            - apparmor=unconfined 
+        volumes:
+            # for X11 forwarding
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            # use named volumes for the source code in which the development takes place
+            # - this makes it possible to change the code from within the container persistently
+            # - the existing code in the container is not overwritten but shadowed by the named volume
+            #       "If you mount an empty volume into a directory in the container in which files or directories exist, 
+            #       these files or directories are propagated (copied) into the volume. 
+            #       Similarly, if you start a container and specify a volume which does not already exist, 
+            #       an empty volume is created for you. This is a good way to pre-populate data that another container needs."
+            - catkin-ws-src_bind-volume:/home/ros-user/catkin_ws/src
+            - config_volume:/config_volume
+            # for ssh agent forwarding when entering the container
+            # This is done automatically by VSC, but when working via CLI this setting is required
+            - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+volumes:
+    catkin-ws-src_bind-volume:
+        driver_opts:
+            type: none
+            device: ${PWD}/catkin-ws-src_bind-volume
+            o: bind
+    config_volume:
+        driver_opts:
+            type: none
+            device: ${PWD}/.devcontainer/config_volume
+            o: bind
