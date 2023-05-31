@@ -17,6 +17,10 @@ services:
             DISPLAY: $DISPLAY
             # for software rendering of opengl. Fixes error in rqt
             LIBGL_ALWAYS_SOFTWARE: 1  
+            # for GUI forwarding on WSL2 on windows
+            WAYLAND_DISPLAY: $WAYLAND_DISPLAY
+            XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
+            PULSE_SERVER: $PULSE_SERVER
         # for X11 forwarding
         network_mode: "host"
         # this command will hold the container open
@@ -31,6 +35,9 @@ services:
         volumes:
             # for X11 forwarding
             - /tmp/.X11-unix:/tmp/.X11-unix
+            # for GUI forwarding on WSL2 on windows
+            #- /run/desktop/mnt/host/wslg:/mnt/wslg
+            - /mnt/wslg:/mnt/wslg
             # use named volumes for the source code in which the development takes place
             # - this makes it possible to change the code from within the container persistently
             # - the existing code in the container is not overwritten but shadowed by the named volume
@@ -38,19 +45,8 @@ services:
             #       these files or directories are propagated (copied) into the volume. 
             #       Similarly, if you start a container and specify a volume which does not already exist, 
             #       an empty volume is created for you. This is a good way to pre-populate data that another container needs."
-            - catkin-ws-src_bind-volume:/home/ros-user/catkin_ws/src
-            - config_volume:/config_volume
+            - ../catkin-ws-src_bind-volume:/home/ros-user/catkin_ws/src
+            - ./config_volume:/config_volume
             # for ssh agent forwarding when entering the container
             # This is done automatically by VSC, but when working via CLI this setting is required
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
-volumes:
-    catkin-ws-src_bind-volume:
-        driver_opts:
-            type: none
-            device: ${PWD}/catkin-ws-src_bind-volume
-            o: bind
-    config_volume:
-        driver_opts:
-            type: none
-            device: ${PWD}/.devcontainer/config_volume
-            o: bind
