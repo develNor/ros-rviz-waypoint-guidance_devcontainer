@@ -5,4 +5,4 @@ set -e
 # Print commands and their arguments as they are executed.
 set -x
 
-docker exec ros-container bash
+docker exec -it ros-container bash
