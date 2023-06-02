@@ -11,7 +11,21 @@
         - (prevents error because of empty SSH_AUTH_SOCK)
     - get code `git clone https://github.com/develNor/ros-rviz-waypoint-guidance_devcontainer.git`
 
-# Start the demo via CLI
+# Start the demo via VSC (recommended)
+- (For Windows: Start Docker Desktop)
+- Open VSC
+- (For Windows: Connect to WSL)
+- open this repository
+- `Show all commands`/`Ctrl+Shift+P` -> `Dev-Containers: Reopen in Container`
+- two options:
+    - **manuell**    
+        - in integrated Terminal (`Ctrl+Shift+ö`):
+            - `cd ~/catkin_ws && catkin_make`
+            - `roslaunch rviz-waypoint-gui_ros1 demo.launch`
+    - **shortcut**
+        - `Show all commands`/`Ctrl+Shift+P` -> `Tasks: Run Test Task`
+
+# Start the demo via CLI (e.g. for debugging)
 - (For Windows: Start Docker Desktop)
 - (For Windows: Use WSL-Terminal)
 - `cd path/to/ros-rviz-waypoint-guidance_devcontainer`
@@ -19,15 +33,6 @@
 - `./up_container.sh`
 - `./start_terminal.sh`
     - (now you are inside the docker container:)
-    - `cd ~/catkin_ws && catkin_make`
-    - `roslaunch rviz-waypoint-gui_ros1 demo.launch`
-
-# Start the demo via VSC
-also possible but for windows the GUI is not working.
-- (For Windows: Start Docker Desktop)
-- open this repository in VSC
-- `Show all commands`/`Ctrl+Shift+P` -> `Dev-Containers: Reopen in Container`
-- in integrated Terminal (`Ctrl+Shift+ö`):
     - `cd ~/catkin_ws && catkin_make`
     - `roslaunch rviz-waypoint-gui_ros1 demo.launch`
 

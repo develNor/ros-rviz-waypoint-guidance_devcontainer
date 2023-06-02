@@ -10,10 +10,12 @@ services:
         container_name: ros-container
         environment:
             # for ssh agent forwarding when entering the container
-            # This is done automatically by VSC, but when working via CLI this setting is required
+            # - This is done automatically by VSC, but when working via CLI this setting is required
             SSH_AUTH_SOCK: ${SSH_AUTH_SOCK}
-            # for X11 forwarding
-            DISPLAY: $DISPLAY
+            # Display for GUI applications
+            # - for native linux "DISPLAY: ${DISPLAY}" works
+            # - for wls2 the display variable is shadowed, making the hardcoded "DISPLAY: :0" necessary
+            DISPLAY: :0
             # for software rendering of opengl. Fixes error in rqt
             LIBGL_ALWAYS_SOFTWARE: 1
         # for X11 forwarding
@@ -30,15 +32,9 @@ services:
         volumes:
             # for X11 forwarding
             - /tmp/.X11-unix:/tmp/.X11-unix
-            # use named volumes for the source code in which the development takes place
-            # - this makes it possible to change the code from within the container persistently
-            # - the existing code in the container is not overwritten but shadowed by the named volume
-            #       "If you mount an empty volume into a directory in the container in which files or directories exist, 
-            #       these files or directories are propagated (copied) into the volume. 
-            #       Similarly, if you start a container and specify a volume which does not already exist, 
-            #       an empty volume is created for you. This is a good way to pre-populate data that another container needs."
-            - ../catkin-ws-src_bind-volume:/home/ros-user/catkin_ws/src
-            - ./config_volume:/config_volume
             # for ssh agent forwarding when entering the container
             # This is done automatically by VSC, but when working via CLI this setting is required
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+            # local mounts
+            - ../catkin-ws-src_bind-mount:/home/ros-user/catkin_ws/src
+            - ./config_bind-mount:/config_bind-mount

@@ -13,5 +13,16 @@
             "isDefault": true
         }
     },
+    {
+        "label": "Run Demo (catkin_make + roslaunch demo)",
+        "type": "shell",
+        "command": "roslaunch rviz-waypoint-gui_ros1 demo.launch",
+        "problemMatcher": [],
+        "dependsOn": ["catkin make"] ,
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        },
+    },
  ]
 }

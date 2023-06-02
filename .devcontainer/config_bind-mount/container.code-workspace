@@ -1,0 +1,22 @@
+{
+	"folders": [
+        {
+            "path": "/home/ros-user/catkin_ws/src",
+            "name": "catkin-ws-src_bind-mount"
+        },
+        {
+            "path": "/home/ros-user"
+        },
+        {
+            "path": "."
+        },
+    ],
+    "settings": {
+        "python.autoComplete.extraPaths": [
+            "/opt/ros/noetic/lib/python3/dist-packages"
+        ],
+        "python.analysis.extraPaths": [
+            "/opt/ros/noetic/lib/python3/dist-packages"
+        ]
+    },
+}
