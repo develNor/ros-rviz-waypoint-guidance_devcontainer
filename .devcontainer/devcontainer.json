@@ -1,7 +1,7 @@
 // See https://containers.dev/implementors/json_reference/
 {
     // A name for the dev container displayed in the UI.   
-    "name": "${env:COMPOSE_PROJECT_NAME}",
+    "name": "ros-rviz-dev",
     "dockerComposeFile": "docker-compose.yml",
     "service": "ros-service",
 	"workspaceFolder": "/config_bind-mount/container.code-workspace",
