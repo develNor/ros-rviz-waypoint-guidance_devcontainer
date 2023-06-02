@@ -16,14 +16,14 @@
 - Open VSC
 - (For Windows: Connect to WSL)
 - open this repository
-- `Show all commands`/`Ctrl+Shift+P` -> `Dev-Containers: Reopen in Container`
+- `Show all commands` (`Ctrl+Shift+P`) -> `Dev-Containers: Reopen in Container`
 - two options:
     - **manuell**    
         - in integrated Terminal (`Ctrl+Shift+ö`):
             - `cd ~/catkin_ws && catkin_make`
             - `roslaunch rviz-waypoint-gui_ros1 demo.launch`
     - **shortcut**
-        - `Show all commands`/`Ctrl+Shift+P` -> `Tasks: Run Test Task`
+        - `Show all commands` (`Ctrl+Shift+P`) -> `Tasks: Run Test Task`
 
 # Start the demo via CLI (e.g. for debugging)
 - (For Windows: Start Docker Desktop)
