@@ -26,10 +26,10 @@
             "command": "./down_container.sh",
         },
         {
-            "label": "start terminal",
+            "label": "exec cli for container",
             "type": "shell",
             "problemMatcher": [],
-            "command": "./start_terminal.sh",
+            "command": "./exec_cli_for_container.sh",
         },
         {
             "label": "up container",
@@ -37,11 +37,5 @@
             "problemMatcher": [],
             "command": "./up_container.sh",
         },
-        {
-            "label": "init workspace",
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "./init_workspace.sh",
-        }
     ]
 }

@@ -5,4 +5,6 @@ set -e
 # Print commands and their arguments as they are executed.
 set -x
 
-docker exec -it ros-container bash
+export $(grep -v '^#' .env | xargs)
+
+docker exec -it ${COMPOSE_PROJECT_NAME}_container bash

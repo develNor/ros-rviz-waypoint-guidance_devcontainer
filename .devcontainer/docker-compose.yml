@@ -1,13 +1,15 @@
 services:
-    ros-service:
+    myservice:
+        env_file:
+            - ../.env
         build:
             # filepath to the Dockerfile
             context: .
             ssh:
                 # for ssh agent forwarding during build (used for cloning private git repos)
                 - default
-        image: ros-image
-        container_name: ros-container
+        image: ${COMPOSE_PROJECT_NAME}_image
+        container_name: ${COMPOSE_PROJECT_NAME}_container
         environment:
             # for ssh agent forwarding when entering the container
             # - This is done automatically by VSC, but when working via CLI this setting is required
@@ -36,5 +38,5 @@ services:
             # This is done automatically by VSC, but when working via CLI this setting is required
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
             # local mounts
-            - ../catkin-ws-src_bind-mount:/home/ros-user/catkin_ws/src
+            - ../catkin-ws-src_bind-mount:/home/myuser/catkin_ws/src
             - ./config_bind-mount:/config_bind-mount

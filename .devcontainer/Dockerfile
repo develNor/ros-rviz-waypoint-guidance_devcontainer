@@ -7,7 +7,7 @@ FROM osrf/ros:noetic-desktop-full-focal
 ####################################################################################################
 
 # Add non-root user
-ENV USERNAME=ros-user
+ENV USERNAME=myuser
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \

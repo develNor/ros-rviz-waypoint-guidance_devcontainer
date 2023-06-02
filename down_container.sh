@@ -5,5 +5,7 @@ set -e
 # Print commands and their arguments as they are executed.
 set -x
 
-docker stop ros-container
-docker rm ros-container
+export $(grep -v '^#' .env | xargs)
+
+docker stop ${COMPOSE_PROJECT_NAME}_container
+docker rm ${COMPOSE_PROJECT_NAME}_container
