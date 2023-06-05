@@ -10,18 +10,11 @@
     - should be the default when installing docker
 - setup ssh-agent for later forwarding (only for Windows)
     - (Motivation: prevents error because of empty SSH_AUTH_SOCK)
-    - enable SSH Agent automatically on Windows
-        - start PowerShell **with administrator rights**, then
-        - `Set-Service ssh-agent -StartupType Automatic`
-        - `Start-Service ssh-agent`
-        - `Get-Service ssh-agent`
     - startup ssh-agent in WSL automatically in the background
         - open WSL
         - add startup of ssh-agent to bashrc via `echo 'eval "$(ssh-agent)"' >> ~/.bashrc`
 - enable X11 Forwarding for Docker
-    - `sudo apt-get update` (only for Windows)
-    - `sudo apt-get install x11-server-utils` (only for Windows)
-    - `xhost +local:docker`
+    - `xhost +local:docker`(only Linux and might not be required)
 - VSC is installed and has the extension 
     - "Dev Container"
     - "WSL" (only for Windows)
