@@ -1,15 +1,11 @@
 services:
     myservice:
-        env_file:
-            - ../.env
         build:
             # filepath to the Dockerfile
             context: .
             ssh:
                 # for ssh agent forwarding during build (used for cloning private git repos)
                 - default
-        image: ${COMPOSE_PROJECT_NAME}_image
-        container_name: ${COMPOSE_PROJECT_NAME}_container
         environment:
             # for ssh agent forwarding when entering the container
             # - This is done automatically by VSC, but when working via CLI this setting is required
@@ -20,6 +16,8 @@ services:
             DISPLAY: :0
             # for software rendering of opengl. Fixes error in rqt
             LIBGL_ALWAYS_SOFTWARE: 1
+        image: ${COMPOSE_PROJECT_NAME}_image
+        container_name: ${COMPOSE_PROJECT_NAME}_container
         # for X11 forwarding
         network_mode: "host"
         # this command will hold the container open

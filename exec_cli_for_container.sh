@@ -5,6 +5,6 @@ set -e
 # Print commands and their arguments as they are executed.
 set -x
 
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .devcontainer/.env | xargs)
 
 docker exec -it ${COMPOSE_PROJECT_NAME}_container bash
