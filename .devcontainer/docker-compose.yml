@@ -14,7 +14,7 @@ services:
             # - for native linux "DISPLAY: ${DISPLAY}" works
             # - for wls2 the display variable is shadowed, making the hardcoded "DISPLAY: :0" necessary
             DISPLAY: :0
-            # for software rendering of opengl. Fixes error in rqt
+            # for software rendering of opengl. Fixes errors in rqt and rviz
             LIBGL_ALWAYS_SOFTWARE: 1
         image: ${COMPOSE_PROJECT_NAME}_image
         container_name: ${COMPOSE_PROJECT_NAME}_container
@@ -22,16 +22,7 @@ services:
         network_mode: "host"
         # this command will hold the container open
         command: ["tail","-f","/dev/null"]
-        security_opt:
-            # for using the google chrome browser inside the container
-            # see: https://stackoverflow.com/a/53975412
-            - seccomp=unconfined
-            # fixes an error with rviz which occurs whith the obove seccomp profile
-            # see: https://answers.ros.org/question/301056/ros2-rviz-in-docker-container/
-            - apparmor=unconfined 
         volumes:
-            # for X11 forwarding
-            - /tmp/.X11-unix:/tmp/.X11-unix
             # for ssh agent forwarding when entering the container
             # This is done automatically by VSC, but when working via CLI this setting is required
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}

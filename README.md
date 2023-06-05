@@ -3,9 +3,11 @@
     - WSL is often preinstalled on windows
     - It could be the case that WSL 1 is installed and has to be upgraded
     - check and upgrade: https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2
+    - particularly old versions of windows require a manual installation of WSL2: https://learn.microsoft.com/de-de/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 - Current installation of `docker` and `docker compose`
-    - Linux: install docker engine
-    - Windows: install docker desktop 
+    - Linux: install docker engine (tested with Decker Engine 24.0.2, Docker Compose version v2.18.1)
+    - Windows: install docker desktop (tested with Docker Desktop 4.20)
+    - **Note: Docker compose v1 will not work**
 - enable WSL2 backend for Docker (only for Windows)
     - should be the default when installing docker
 - setup ssh-agent for later forwarding (only for Windows)
