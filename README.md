@@ -1,15 +1,32 @@
-# Windows Setup
-- install WSL 2
-- install Docker Desktop with WSL 2 Backend
-- install VSC with extensions: "Dev Containers", "WSL"
-- in WSL-Terminal:
-    - install and setup xhost
-        - `sudo apt-get update`
-        - `sudo apt-get install x11-server-utils`
-        - `xhost +local:docker`
-    - add startup of ssh-agent to bashrc: `echo 'eval "$(ssh-agent)"' >> ~/.bashrc`
-        - (prevents error because of empty SSH_AUTH_SOCK)
-    - get code `git clone https://github.com/develNor/ros-rviz-waypoint-guidance_devcontainer.git`
+# Prerequisits
+- install WSL2 (only for Windows)
+    - WSL is often preinstalled on windows
+    - It could be the case that WSL 1 is installed and has to be upgraded
+    - check and upgrade: https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2
+- Current installation of `docker` and `docker compose`
+    - Linux: install docker engine
+    - Windows: install docker desktop 
+- enable WSL2 backend for Docker (only for Windows)
+    - should be the default when installing docker
+- setup ssh-agent for later forwarding (only for Windows)
+    - (Motivation: prevents error because of empty SSH_AUTH_SOCK)
+    - enable SSH Agent automatically on Windows
+        - start PowerShell **with administrator rights**, then
+        - `Set-Service ssh-agent -StartupType Automatic`
+        - `Start-Service ssh-agent`
+        - `Get-Service ssh-agent`
+    - startup ssh-agent in WSL automatically in the background
+        - open WSL
+        - add startup of ssh-agent to bashrc via `echo 'eval "$(ssh-agent)"' >> ~/.bashrc`
+- enable X11 Forwarding for Docker
+    - `sudo apt-get update` (only for Windows)
+    - `sudo apt-get install x11-server-utils` (only for Windows)
+    - `xhost +local:docker`
+- VSC is installed and has the extension 
+    - "Dev Container"
+    - "WSL" (only for Windows)
+- get this repository: `git clone https://github.com/develNor/ros-rviz-waypoint-guidance_devcontainer.git` 
+    - (For Windows: execute inside WSL)
 
 # Start the demo via VSC (recommended)
 - (For Windows: Start Docker Desktop)
@@ -18,7 +35,7 @@
 - open this repository
 - `Show all commands` (`Ctrl+Shift+P`) -> `Dev-Containers: Reopen in Container`
 - two options:
-    - **manuell**    
+    - **manual**    
         - in integrated Terminal (`Ctrl+Shift+ö`):
             - `cd ~/catkin_ws && catkin_make`
             - `roslaunch rviz-waypoint-gui_ros1 demo.launch`
