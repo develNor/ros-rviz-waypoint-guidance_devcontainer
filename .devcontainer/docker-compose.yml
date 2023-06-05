@@ -23,7 +23,7 @@ services:
         # this command will hold the container open
         command: ["tail","-f","/dev/null"]
         volumes:
-            # for X11 forwarding
+            # for X11 forwarding (required for combination of windows + cli)
             - /tmp/.X11-unix:/tmp/.X11-unix
             # for ssh agent forwarding when entering the container
             # This is done automatically by VSC, but when working via CLI this setting is required
