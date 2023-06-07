@@ -57,6 +57,7 @@ RUN sudo apt-get update && sudo apt-get -y install \
     python-is-python3 \
     python3-shapely \
     python3-scipy \
+    ros-$ROS_DISTRO-foxglove-bridge \
   && sudo rm -rf /var/lib/apt/lists/*
 
 
