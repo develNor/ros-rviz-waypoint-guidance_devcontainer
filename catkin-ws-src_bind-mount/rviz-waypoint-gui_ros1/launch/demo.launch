@@ -1,6 +1,12 @@
 <launch>
     <arg name="launch_rviz" default="true"/>
 
+    <!-- Including in another launch file -->
+    <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
+        <arg name="port" value="8765" />
+        <!-- ... other arguments ... -->
+    </include>
+
     <node pkg="rviz-waypoint-gui_ros1" type="click_extend_linestrip_node.py" name="click_extend_line_strip_node"/>
 
     <group if="$(arg launch_rviz)">
