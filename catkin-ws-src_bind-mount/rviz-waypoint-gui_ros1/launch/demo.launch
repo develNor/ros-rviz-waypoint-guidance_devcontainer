@@ -1,10 +1,9 @@
 <launch>
     <arg name="launch_rviz" default="true"/>
+    <arg name="rosbag-play_arguments" default=" --clock --loop" /> <!-- optional only play first second: "-u 1"  -->
 
-    <!-- Including in another launch file -->
     <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
         <arg name="port" value="8765" />
-        <!-- ... other arguments ... -->
     </include>
 
     <node pkg="rviz-waypoint-gui_ros1" type="click_extend_linestrip_node.py" name="click_extend_line_strip_node"/>
@@ -13,4 +12,5 @@
         <node type="rviz" name="rviz" pkg="rviz" args="-d $(find rviz-waypoint-gui_ros1)/config/demo.rviz" />
     </group>
 
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag-play_arguments) /rosbags_bind-mount/221220-13-16-38_with-costmap_0.bag"/>
 </launch>

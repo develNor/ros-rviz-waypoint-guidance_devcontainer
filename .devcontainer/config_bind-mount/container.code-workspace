@@ -8,6 +8,9 @@
             "path": "/home/myuser"
         },
         {
+            "path": "/rosbags_bind-mount"
+        },
+        {
             "path": "."
         },
     ],

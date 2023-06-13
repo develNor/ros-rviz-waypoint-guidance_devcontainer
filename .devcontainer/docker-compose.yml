@@ -31,3 +31,4 @@ services:
             # local mounts
             - ../catkin-ws-src_bind-mount:/home/myuser/catkin_ws/src
             - ./config_bind-mount:/config_bind-mount
+            - ../rosbags_bind-mount:/rosbags_bind-mount

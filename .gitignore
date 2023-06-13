@@ -1,1 +1,6 @@
 catkin-ws-src_bind-mount/.vscode
+
+# exclude the rosbags_bind-mount
+rosbags_bind-mount/*
+# except the .gitkeep file so that the folder exists for git
+!rosbags_bind-mount/.gitkeep 
