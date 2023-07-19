@@ -1,6 +1,5 @@
 // See https://containers.dev/implementors/json_reference/
 {
-    // A name for the dev container displayed in the UI.   
     "dockerComposeFile": "docker-compose.yml",
     "service": "myservice",
 	"workspaceFolder": "/config_bind-mount/container.code-workspace",

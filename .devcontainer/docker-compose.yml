@@ -29,6 +29,6 @@ services:
             # This is done automatically by VSC, but when working via CLI this setting is required
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
             # local mounts
-            - ../catkin-ws-src_bind-mount:/home/myuser/catkin_ws/src
             - ./config_bind-mount:/config_bind-mount
+            - ../catkin-ws-src_bind-mount:/home/myuser/catkin_ws/src
             - ../rosbags_bind-mount:/rosbags_bind-mount

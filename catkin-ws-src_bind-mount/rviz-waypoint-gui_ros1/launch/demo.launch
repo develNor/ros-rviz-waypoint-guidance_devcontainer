@@ -2,6 +2,11 @@
     <arg name="launch_rviz" default="true"/>
     <arg name="rosbag-play_arguments" default=" --clock --loop" /> <!-- optional only play first second: "-u 1"  -->
 
+    <!-- <arg name="bag_filename" default="220602-10-09-23-trip_0" /> -->
+    <!-- <arg name="bag_filename" default="221220-13-16-38_with-costmap_0" /> -->
+    <arg name="bag_filename" default="costmap_1second" />
+    <!-- <arg name="bag_filename" default="costmap_single_msg" /> -->
+
     <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
         <arg name="port" value="8765" />
     </include>
@@ -12,5 +17,7 @@
         <node type="rviz" name="rviz" pkg="rviz" args="-d $(find rviz-waypoint-gui_ros1)/config/demo.rviz" />
     </group>
 
-    <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag-play_arguments) /rosbags_bind-mount/221220-13-16-38_with-costmap_0.bag"/>
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag-play_arguments) /rosbags_bind-mount/$(arg bag_filename).bag"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="1 0 0 0 0 0 1 map base_link 100" />
 </launch>
