@@ -20,4 +20,6 @@
     <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag-play_arguments) /rosbags_bind-mount/$(arg bag_filename).bag"/>
 
     <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="1 0 0 0 0 0 1 map base_link 100" />
+
+    <node pkg="rviz-waypoint-gui_ros1" type="print_costmap.py" name="print_costmap_node"/>
 </launch>
