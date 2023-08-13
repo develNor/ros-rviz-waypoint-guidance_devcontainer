@@ -40,8 +40,8 @@ class ClickExtendLineStripNode:
         rospy.Subscriber('costmap/costmap', OccupancyGrid, self.costmap_callback)
 
         # Create a marker publisher and advertise the line strip marker
-        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=1)
-        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=1)
+        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=10)
+        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=10)
 
         # Create a point subscriber and set the callback function
         self.subscription = rospy.Subscriber( '/clicked_point', PointStamped,
@@ -132,11 +132,11 @@ class ClickExtendLineStripNode:
         return self.publishIntersectionMessage(False)   
     
     def publishIntersectionMessage(self,status):
-        if status and not self.has_intersection:
+        if status :
                 rospy.logout("Intersection")
                 self.publish_intersection('not_driveable')
                 self.has_intersection = True
-        elif not status and self.has_intersection:
+        elif not status :
                 self.publish_intersection('driveable')
                 self.has_intersection = False 
          
