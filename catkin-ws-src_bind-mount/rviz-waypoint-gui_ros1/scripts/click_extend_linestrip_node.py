@@ -40,8 +40,8 @@ class ClickExtendLineStripNode:
         rospy.Subscriber('costmap/costmap', OccupancyGrid, self.costmap_callback)
 
         # Create a marker publisher and advertise the line strip marker
-        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=10)
-        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=10)
+        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=100)
+        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=100)
 
         # Create a point subscriber and set the callback function
         self.subscription = rospy.Subscriber( '/clicked_point', PointStamped,
