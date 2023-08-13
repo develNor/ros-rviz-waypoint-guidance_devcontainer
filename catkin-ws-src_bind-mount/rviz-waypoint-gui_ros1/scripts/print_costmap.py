@@ -13,10 +13,10 @@ class PrintCostmapNode:
 
     def costmap_callback(self, msg, other):
         # Add the received point to the line strip marker
-        rospy.logwarn("costmap_callback")
+        #rospy.logwarn("costmap_callback")
         filtered_list = [data for data in msg.data if data not in [0,-1]]
         str_msg = str(filtered_list)
-        rospy.logwarn(str_msg)
+        #rospy.logwarn(str_msg)
 
 def main(args=None):
     node = PrintCostmapNode()
