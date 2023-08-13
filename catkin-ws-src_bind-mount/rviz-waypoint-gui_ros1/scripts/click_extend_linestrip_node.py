@@ -55,8 +55,9 @@ class ClickExtendLineStripNode:
     def reset(self,msg,other):
         self.marker.points = []
         self.polygon.polygon.points= []
-        self.marker_pub.publish(self.marker)
         self.polygon_pub.publish(self.polygon)
+        self.marker_pub.publish(self.marker)
+        
 
     def costmap_callback(self, costmap):
         if self.current_costmap is None or self.has_costmap_changed(costmap):
