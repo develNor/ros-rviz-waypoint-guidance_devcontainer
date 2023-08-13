@@ -1,5 +1,5 @@
 <launch>
-    <arg name="launch_rviz" default="true"/>
+    <arg name="launch_rviz" default="false"/>
     <arg name="rosbag-play_arguments" default=" --clock --loop" /> <!-- optional only play first second: "-u 1"  -->
 
     <!-- <arg name="bag_filename" default="220602-10-09-23-trip_0" /> -->

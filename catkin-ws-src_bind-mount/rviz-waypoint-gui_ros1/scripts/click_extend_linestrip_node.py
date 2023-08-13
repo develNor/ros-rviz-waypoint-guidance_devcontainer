@@ -10,7 +10,7 @@ from nav_msgs.msg import OccupancyGrid
 import numpy as np
 from scipy.interpolate import make_interp_spline
 import tf2_ros
-from std_msgs.msg import String
+from std_msgs.msg import String,Int32
 
 
 class ClickExtendLineStripNode:
@@ -47,6 +47,16 @@ class ClickExtendLineStripNode:
         self.subscription = rospy.Subscriber( '/clicked_point', PointStamped,
             self.point_callback,
             10)
+        # Create a point subscriber and set the callback function
+        self.subscriptionReset = rospy.Subscriber('/reset', Int32,
+            self.reset,
+            10)
+
+    def reset(self,msg,other):
+        self.marker.points = []
+        self.polygon.polygon.points= []
+        self.marker_pub.publish(self.marker)
+        self.polygon_pub.publish(self.polygon)
 
     def costmap_callback(self, costmap):
         if self.current_costmap is None or self.has_costmap_changed(costmap):
@@ -199,7 +209,7 @@ class ClickExtendLineStripNode:
         
         self.polygon.polygon.points = polygon_points
         self.check_polygon_intersection(self.polygon)
-        self.check_polygon_intersection_withPath(self.polygon)
+        #self.check_polygon_intersection_withPath(self.polygon)
             
 
         self.polygon_pub.publish(self.polygon)
