@@ -40,8 +40,8 @@ class ClickExtendLineStripNode:
         rospy.Subscriber('costmap/costmap', OccupancyGrid, self.costmap_callback)
 
         # Create a marker publisher and advertise the line strip marker
-        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=100)
-        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=100)
+        self.marker_pub = rospy.Publisher('line_strip_marker', Marker, queue_size=1)
+        self.polygon_pub = rospy.Publisher('buffered_line', PolygonStamped, queue_size=1)
 
         # Create a point subscriber and set the callback function
         self.subscription = rospy.Subscriber( '/clicked_point', PointStamped,
@@ -57,7 +57,7 @@ class ClickExtendLineStripNode:
         self.polygon.polygon.points= []
         self.polygon_pub.publish(self.polygon)
         self.marker_pub.publish(self.marker)
-        
+        self.publishIntersectionMessage(False)         
 
     def costmap_callback(self, costmap):
         if self.current_costmap is None or self.has_costmap_changed(costmap):
@@ -105,10 +105,12 @@ class ClickExtendLineStripNode:
         rospy.logout(self.current_costmap[0])
         intersects = False
         for cell in self.current_costmap:
-            coord_x, coord_y,cost = cell
+            if not intersects:
+                coord_x, coord_y,cost = cell
 
-            if self.is_cell_intersects_polygon(coord_x, coord_y, polygon_bounds):
-                self.publishIntersectionMessage(True)           
+                if self.is_cell_intersects_polygon(coord_x, coord_y, polygon_bounds):
+                    intersects=True
+                    self.publishIntersectionMessage(True)           
                 
 
         self.publishIntersectionMessage(False)  
@@ -121,13 +123,15 @@ class ClickExtendLineStripNode:
         intersects = False
  
         for cell in points2d:
-            coord_x, coord_y = cell
-            print("cell",cell)
+            if not intersects:
+                coord_x, coord_y = cell
+                print("cell",cell)
 
-            # Perform detailed intersection check with polygon
-            if self.is_cell_intersects_polygon(coord_x, coord_y, polygon_bounds):
-                rospy.logout("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
-                return self.publishIntersectionMessage(True)           
+                # Perform detailed intersection check with polygon
+                if self.is_cell_intersects_polygon(coord_x, coord_y, polygon_bounds):
+                    rospy.logout("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+                    intersects=True
+                    return self.publishIntersectionMessage(True)           
                 
 
         return self.publishIntersectionMessage(False)   
